@@ -19,7 +19,7 @@ function User(firstName, lastName, email, age) {
   this.lastName = lastName;
   this.email = email;
   this.age = age;
-  this.isLoggedIn = true;
+  this.isLoggedIn = false;
 }
 const userProto = {
   getFullName: function () {
