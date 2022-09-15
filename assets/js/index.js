@@ -1,36 +1,41 @@
-// Минитаска. Методы примитивов
+'use strict';
+// ---------------------------------2. Минитаска. Методы примитивов
 // Функция которая принимает строку и возвращает количество слов в ней.
 const str =
   'Функция которая принимает,           строку и возвращает количество слов в ней';
 
-function wordsCount(str) {
-  const words = str.split(' ');
-  const deleteSpace = words.filter(function (elem) {
-    return elem !== '';
-  });
-  return deleteSpace.length;
-}
+const wordsCount = (str) => str.split(' ').filter((elem) => elem !== '').length;
 //10
+
 
 // Функция, которая получает строку и возвращает размер самого большого слова в ней
 const str2 =
   'Функция, которая получает строку и возвращает размер самого большого слова в ней';
-
-function bigWord(str2) {
-  const words = str2.split(' ');
-  let j = 0;
-  let result;
-  for (let i = 0; i < words.length; i++) {
-    if (words[i].length > j) {
-      j = words[i].length;
-      result = words[i];
-    }
-  }
-  return result;
-}
+const bigWord = (str2) =>
+  str2
+    .split(' ')
+    .reduce((word1, word2) => (word1.length > word2.length ? word1 : word2));
 //'возвращает'
 
-/*Минитаск Функции-конструкторы+прототипы
+
+
+
+
+// ---------------------------------3.Cтрелочные функции
+//Создайте функцию, которая принимает массив с неограниченным количеством данных, и возвращает количество строк, переданных ей в этом массиве. Решить с использованием стрелочных функций
+const arr = [2, 4, 'text1', 'text2', 'text3', 5];
+const countString = (array) =>
+  array.filter((elem) => (elem = typeof elem === 'string')).length;
+
+countString(arr); //3
+
+
+
+
+
+
+
+/*---------------------------------1. Минитаск Функции-конструкторы+прототипы
 Создать функцию-конструктор User
 у пользователей должны быть свойства:
 firstName
