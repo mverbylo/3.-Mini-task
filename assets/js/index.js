@@ -23,11 +23,11 @@ const bigWord = (str2) =>
 
 // ---------------------------------3.Cтрелочные функции
 //Создайте функцию, которая принимает массив с неограниченным количеством данных, и возвращает количество строк, переданных ей в этом массиве. Решить с использованием стрелочных функций
-const arr = [2, 4, 'text1', 'text2', 'text3', 5];
+const array = [2, 4, 'text1', 'text2', 'text3', 5];
 const countString = (array) =>
   array.filter((elem) => (elem = typeof elem === 'string')).length;
 
-countString(arr); //3
+countString(array); //3
 
 
 
