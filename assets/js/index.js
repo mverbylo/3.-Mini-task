@@ -7,19 +7,22 @@ const str =
 const wordsCount = (str) => str.split(' ').filter((elem) => elem !== '').length;
 //10
 
-
 // Функция, которая получает строку и возвращает размер самого большого слова в ней
 const str2 =
   'Функция, которая получает строку и возвращает размер самого большого слова в ней';
-const bigWord = (str2) =>
-  str2
-    .split(' ')
-    .reduce((word1, word2) => (word1.length > word2.length ? word1 : word2));
-//'возвращает'
-
-
-
-
+function bigWord(str2) {
+  let words = str2.split(' '),
+    j = 0,
+    result;
+  for (let i = 0; i < words.length; i++) {
+    if (words[i].length > j) {
+      j = words[i].length;
+      result = words[i];
+    }
+  }
+  return result.length;
+}
+//'10'
 
 // ---------------------------------3.Cтрелочные функции
 //Создайте функцию, которая принимает массив с неограниченным количеством данных, и возвращает количество строк, переданных ей в этом массиве. Решить с использованием стрелочных функций
@@ -28,12 +31,6 @@ const countString = (array) =>
   array.filter((elem) => (elem = typeof elem === 'string')).length;
 
 countString(array); //3
-
-
-
-
-
-
 
 /*---------------------------------1. Минитаск Функции-конструкторы+прототипы
 Создать функцию-конструктор User
