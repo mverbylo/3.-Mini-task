@@ -1,11 +1,96 @@
 'use strict';
 // ---------------------------------3.Cтрелочные функции
-//Создайте функцию, которая принимает массив с неограниченным количеством данных, и возвращает количество строк, переданных ей в этом массиве. Решить с использованием стрелочных функций
-const array = [2, 4, 'text1', 'text2', 'text3', 5];
-const countString = (array) =>
-  array.filter((elem) => (elem = typeof elem === 'string')).length;
+//Создайте функцию, которая принимает неограниченное количество входящих данных,
+//и возвращает количество строк, переданных ей в этом массиве.
+//Решить с использованием стрелочных функций.
 
-countString(array); //3
+const countString = (...input) =>
+  input.filter((elem) => (elem = typeof elem === 'string')).length;
+
+countString(2, 'text1', ...[2, 'text2']); //2
+
+//Создайте функцию продвинутого калькулятора.
+// Он принимает знак, а  затем неограниченное количество чисел,
+// над которыми проведет указанную операцию.
+const sum = (...numbers) =>
+  numbers.reduce((res, currentNumber) => {
+    if (
+      typeof res !== 'number' ||
+      typeof currentNumber !== 'number' ||
+      isNaN(res - currentNumber)
+    ) {
+      return null;
+    }
+    return res + currentNumber;
+  });
+
+const subtraction = (...numbers) =>
+  numbers.reduce((res, currentNumber) => {
+    if (
+      typeof res !== 'number' ||
+      typeof currentNumber !== 'number' ||
+      isNaN(res - currentNumber)
+    ) {
+      return null;
+    }
+    return res - currentNumber;
+  });
+const multiplication = (...numbers) =>
+  numbers.reduce((res, currentNumber) => {
+    if (
+      typeof res !== 'number' ||
+      typeof currentNumber !== 'number' ||
+      isNaN(res - currentNumber)
+    ) {
+      return null;
+    }
+    return res * currentNumber;
+  });
+const division = (...numbers) =>
+  numbers.reduce((res, currentNumber) => {
+    if (
+      typeof res !== 'number' ||
+      typeof currentNumber !== 'number' ||
+      isNaN(res - currentNumber)
+    ) {
+      return null;
+    }
+    return res / currentNumber;
+  });
+
+const calc = function (operator, ...numbers) {
+  switch (operator) {
+    case '+': {
+      return sum(...numbers);
+    }
+    case '-': {
+      return subtraction(...numbers);
+    }
+    case '*': {
+      return multiplication(...numbers);
+    }
+    case '/': {
+      return division(...numbers);
+    }
+    default:
+      result = null;
+  }
+  return result;
+};
+
+calc('+', 10, 2); //12
+calc('+', 10, 2, true); //null
+calc('-', 10, 2); //8
+calc('*', 10, 2); //20
+calc('/', 10, 2); //5
+
+//Имея массив чисел, найдите в нем самое большое.
+//Не используйте циклы или методы перебора массива.
+const arr = [-5, 40, 1000, 90];
+Math.max(...arr); //1000
+
+
+
 
 /*---------------------------------1. Минитаск Функции-конструкторы+прототипы
 Создать функцию-конструктор User
