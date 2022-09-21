@@ -3,15 +3,22 @@
 //Создать рекурсивную функцию вычисления факториала числа.Факториал - произведение всех натуральных чисел от 1 до x.
 // 5! = 1 * 2 * 3 * 4 * 5 = 120
 function factorial(number) {
-  if (Number.isInteger(number)) {
-    if (number === 0) {
-      return 1;
-    }
-    return number > 0
-      ? number * factorial(number - 1)
-      : 'Enter positive number';
+  if (typeof number !== 'number' || isNaN(number)) {
+    throw new TypeError('number must be a positive integer number');
   }
-  return 'Enter intenger number';
+  if (!Number.isInteger(number)) {
+    throw new RangeError('number must be a integer number');
+  }
+  if (number < 0) {
+    throw new RangeError('number must be a positive number');
+  }
+  return number > 0 ? number * factorial(number - 1) : 1;
+}
+
+try {
+  factorial(1.5);
+} catch (err) {
+  alert(err.message);
 }
 /*---------------------------------1. Минитаск Функции-конструкторы+прототипы
 Создать функцию-конструктор User
