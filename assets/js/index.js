@@ -1,25 +1,77 @@
 'use strict';
-//---------------------------------4. Микротаски Рекурсия.
-//Создать рекурсивную функцию вычисления факториала числа.Факториал - произведение всех натуральных чисел от 1 до x.
-// 5! = 1 * 2 * 3 * 4 * 5 = 120
-function factorial(number) {
-  if (typeof number !== 'number' || isNaN(number)) {
-    throw new TypeError('number must be a positive integer number');
-  }
-  if (!Number.isInteger(number)) {
-    throw new RangeError('number must be a integer number');
-  }
-  if (number < 0) {
-    throw new RangeError('number must be a positive number');
-  }
-  return number > 0 ? number * factorial(number - 1) : 1;
-}
+//---------------------------------5.Синтаксис классов. Геттеры и сеттеры
+// Реализовать класс RangeValidator. Обьекты, созданные им должны обладать следующими свойcтвами:
+// from(число)
+// to(число)
 
-try {
-  factorial(1.5);
-} catch (err) {
-  alert(err.message);
+// Реализовать геттеры и сеттеры для обоих свойств.
+// Реализовать getter range, который будет возвращать массив, состоящий из границ диапазона from и to.
+// Реализовать метод validate, который будет принимать число и проверить входит ли число в указанный диапазон. Метод возвращает это же число, если оно входит в диапазон. И кинет ошибку, если не входит.
+
+
+// Bonus tasks:
+// Создать проверки которые убедятся, что число во from меньше числа to и наоборот.
+// Создать проверки, которые помогут избежать попадание неправильных типов данных в from и to.
+
+class RangeValidator {
+  #to;
+  #from;
+  #range;
+  constructor(from, to) {
+    this.from = from;
+    this.to = to;
+  }
+  get from() {
+    return this.#from;
+  }
+  get to() {
+    return this.#to;
+  }
+
+  get range() {
+    this.#range = [];
+    for (; this.#from <= this.#to; this.#from++) {
+      this.#range.push(this.#from);
+    }
+    return this.#range;
+  }
+
+  set from(newFrom) {
+    if (typeof newFrom !== 'number' || isNaN(newFrom)) {
+      throw new TypeError("Incorrect parameter, in 'from' expected number");
+    }
+    if (newFrom > this.#to) {
+      throw new RangeError(
+        "Incorrect parameter, in 'from' expected number less than 'to'"
+      );
+    }
+    this.#from = newFrom;
+  }
+
+  set to(newTo) {
+    if (typeof newTo !== 'number' || isNaN(newTo)) {
+      throw new TypeError("Incorrect parameter, in 'to' expected number");
+    }
+    if (newTo < this.#from) {
+      throw new RangeError(
+        "Incorrect parameter, in 'to' expected number more than 'from'"
+      );
+    }
+    this.#to = newTo;
+  }
+
+  validate(numberInRange) {
+    if (numberInRange < this.#from || numberInRange > this.#to) {
+      throw new RangeError(
+        'Incorrect parameter, numberInRange не входит в range'
+      );
+    }
+    return numberInRange;
+  }
 }
+const range1 = new RangeValidator(10,20);
+
+
 /*---------------------------------1. Минитаск Функции-конструкторы+прототипы
 Создать функцию-конструктор User
 у пользователей должны быть свойства:
@@ -169,4 +221,26 @@ calc('/', 10, 2); //5
 //Не используйте циклы или методы перебора массива.
 const arr = [-5, 40, 1000, 90];
 Math.max(...arr); //1000
+*/
+/*---------------------------------4. Микротаски Рекурсия.
+//Создать рекурсивную функцию вычисления факториала числа.Факториал - произведение всех натуральных чисел от 1 до x.
+// 5! = 1 * 2 * 3 * 4 * 5 = 120
+function factorial(number) {
+  if (typeof number !== 'number' || isNaN(number)) {
+    throw new TypeError('number must be a positive integer number');
+  }
+  if (!Number.isInteger(number)) {
+    throw new RangeError('number must be a integer number');
+  }
+  if (number < 0) {
+    throw new RangeError('number must be a positive number');
+  }
+  return number > 0 ? number * factorial(number - 1) : 1;
+}
+
+try {
+  factorial(1.5);
+} catch (err) {
+  alert(err.message);
+}
 */
