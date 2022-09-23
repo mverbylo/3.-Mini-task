@@ -8,7 +8,6 @@
 // Реализовать getter range, который будет возвращать массив, состоящий из границ диапазона from и to.
 // Реализовать метод validate, который будет принимать число и проверить входит ли число в указанный диапазон. Метод возвращает это же число, если оно входит в диапазон. И кинет ошибку, если не входит.
 
-
 // Bonus tasks:
 // Создать проверки которые убедятся, что число во from меньше числа to и наоборот.
 // Создать проверки, которые помогут избежать попадание неправильных типов данных в from и to.
@@ -16,7 +15,6 @@
 class RangeValidator {
   #to;
   #from;
-  #range;
   constructor(from, to) {
     this.from = from;
     this.to = to;
@@ -29,12 +27,17 @@ class RangeValidator {
   }
 
   get range() {
-    this.#range = [];
-    for (; this.#from <= this.#to; this.#from++) {
-      this.#range.push(this.#from);
-    }
-    return this.#range;
+    return [this.#from, this.#to];
   }
+
+  // масиив диапазона
+  // get range() {
+  //   const arr = [];
+  //   for (; this.#from <= this.#to; this.#from++) {
+  //     arr.push(this.#from);
+  //   }
+  //   return arr;
+  // }
 
   set from(newFrom) {
     if (typeof newFrom !== 'number' || isNaN(newFrom)) {
@@ -69,8 +72,7 @@ class RangeValidator {
     return numberInRange;
   }
 }
-const range1 = new RangeValidator(10,20);
-
+const range1 = new RangeValidator(5, 50);
 
 /*---------------------------------1. Минитаск Функции-конструкторы+прототипы
 Создать функцию-конструктор User
