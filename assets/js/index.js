@@ -1,79 +1,4 @@
 'use strict';
-//---------------------------------5.Синтаксис классов. Геттеры и сеттеры
-// Реализовать класс RangeValidator. Обьекты, созданные им должны обладать следующими свойcтвами:
-// from(число)
-// to(число)
-
-// Реализовать геттеры и сеттеры для обоих свойств.
-// Реализовать getter range, который будет возвращать массив, состоящий из границ диапазона from и to.
-// Реализовать метод validate, который будет принимать число и проверить входит ли число в указанный диапазон. Метод возвращает это же число, если оно входит в диапазон. И кинет ошибку, если не входит.
-
-// Bonus tasks:
-// Создать проверки которые убедятся, что число во from меньше числа to и наоборот.
-// Создать проверки, которые помогут избежать попадание неправильных типов данных в from и to.
-
-class RangeValidator {
-  #to;
-  #from;
-  constructor(from, to) {
-    this.from = from;
-    this.to = to;
-  }
-  get from() {
-    return this.#from;
-  }
-  get to() {
-    return this.#to;
-  }
-
-  get range() {
-    return [this.#from, this.#to];
-  }
-
-  // масиив диапазона
-  // get range() {
-  //   const arr = [];
-  //   for (; this.#from <= this.#to; this.#from++) {
-  //     arr.push(this.#from);
-  //   }
-  //   return arr;
-  // }
-
-  set from(newFrom) {
-    if (typeof newFrom !== 'number' || isNaN(newFrom)) {
-      throw new TypeError("Incorrect parameter, in 'from' expected number");
-    }
-    if (newFrom > this.#to) {
-      throw new RangeError(
-        "Incorrect parameter, in 'from' expected number less than 'to'"
-      );
-    }
-    this.#from = newFrom;
-  }
-
-  set to(newTo) {
-    if (typeof newTo !== 'number' || isNaN(newTo)) {
-      throw new TypeError("Incorrect parameter, in 'to' expected number");
-    }
-    if (newTo < this.#from) {
-      throw new RangeError(
-        "Incorrect parameter, in 'to' expected number more than 'from'"
-      );
-    }
-    this.#to = newTo;
-  }
-
-  validate(numberInRange) {
-    if (numberInRange < this.#from || numberInRange > this.#to) {
-      throw new RangeError(
-        'Incorrect parameter, numberInRange не входит в range'
-      );
-    }
-    return numberInRange;
-  }
-}
-const range1 = new RangeValidator(5, 50);
-
 /*---------------------------------1. Минитаск Функции-конструкторы+прототипы
 Создать функцию-конструктор User
 у пользователей должны быть свойства:
@@ -246,3 +171,242 @@ try {
   alert(err.message);
 }
 */
+/*---------------------------------5.Синтаксис классов. Геттеры и сеттеры
+// Реализовать класс RangeValidator. Обьекты, созданные им должны обладать следующими свойcтвами:
+// from(число)
+// to(число)
+
+// Реализовать геттеры и сеттеры для обоих свойств.
+// Реализовать getter range, который будет возвращать массив, состоящий из границ диапазона from и to.
+// Реализовать метод validate, который будет принимать число и проверить входит ли число в указанный диапазон. Метод возвращает это же число, если оно входит в диапазон. И кинет ошибку, если не входит.
+
+// Bonus tasks:
+// Создать проверки которые убедятся, что число во from меньше числа to и наоборот.
+// Создать проверки, которые помогут избежать попадание неправильных типов данных в from и to.
+
+class RangeValidator {
+  #to;
+  #from;
+  constructor(from, to) {
+    this.from = from;
+    this.to = to;
+  }
+  get from() {
+    return this.#from;
+  }
+  get to() {
+    return this.#to;
+  }
+
+  get range() {
+    return [this.#from, this.#to];
+  }
+
+  // масиив диапазона
+  // get range() {
+  //   const arr = [];
+  //   for (; this.#from <= this.#to; this.#from++) {
+  //     arr.push(this.#from);
+  //   }
+  //   return arr;
+  // }
+
+  set from(newFrom) {
+    if (typeof newFrom !== 'number' || isNaN(newFrom)) {
+      throw new TypeError("Incorrect parameter, in 'from' expected number");
+    }
+    if (newFrom > this.#to) {
+      throw new RangeError(
+        "Incorrect parameter, in 'from' expected number less than 'to'"
+      );
+    }
+    this.#from = newFrom;
+  }
+
+  set to(newTo) {
+    if (typeof newTo !== 'number' || isNaN(newTo)) {
+      throw new TypeError("Incorrect parameter, in 'to' expected number");
+    }
+    if (newTo < this.#from) {
+      throw new RangeError(
+        "Incorrect parameter, in 'to' expected number more than 'from'"
+      );
+    }
+    this.#to = newTo;
+  }
+
+  validate(numberInRange) {
+    if (typeof numberInRange !== 'number' || isNaN(numberInRange)) {
+      throw new TypeError(
+        "Incorrect parameter, in 'numberInRange' expected number"
+      );
+    }
+    if (numberInRange < this.#from || numberInRange > this.#to) {
+      throw new RangeError(
+        'Incorrect parameter, numberInRange is out of range'
+      );
+    }
+    return numberInRange;
+  }
+}
+const range1 = new RangeValidator(5, 50);
+*/
+// --------------------------------6.MyArray
+// Добавить к имеющимуся классу MyArray следующие методы, имитирующие поведения реальных методов массива:
+// unshift
+// shift
+// Bonus task:
+// Добавить один из следующих методов:
+// forEach
+// map
+// filter
+// reverse
+
+class MyArray {
+  constructor() {
+    this.length = 0;
+  }
+  push(...elems) {
+    for (let i = 0; i < elems.length; i++) {
+      this[this.length++] = elems[i];
+    }
+    return this.length;
+  }
+  pop() {
+    if (this.length === 0) {
+      return;
+    } else {
+      let deleteElem = this[this.length - 1];
+      delete this[--this.length];
+      return deleteElem;
+    }
+  }
+  concat(...elems) {
+    let newArr = new MyArray();
+    for (let i = 0; i < this.length; i++) {
+      newArr.push(this[i]);
+    }
+    for (let i = 0; i < elems.length; i++) {
+      if (MyArray.isMyArray(elems[i])) {
+        for (let j = 0; i < elems[i].length; j++) {
+          newArr.push(elems[i][j]);
+        }
+      } else {
+        newArr.push(elems[i]);
+      }
+    }
+    return newArr;
+  }
+  [Symbol.iterator]() {
+    const context = this;
+    let i = 0;
+    return {
+      next() {
+        return {
+          done: i >= context.length,
+          value: context[i++],
+        };
+      },
+    };
+  }
+
+  shift(...elems) {
+    for (let i = 0; i <= elems.length; i++) {
+      this[i + elems.length] = this[i];
+    } // последний элемент не добавляется
+    for (let i = 0; i < elems.length; i++) {
+      this[i] = elems[i];
+    }
+    return (this.length += elems.length);
+  }
+
+  unshift() {
+    if (this.length === 0) {
+      return;
+    } else {
+      let deleteElem = this[0];
+      for (let i = 0; i < this.length; i++) {
+        this[i] = this[i + 1];
+      }
+      delete this[--this.length];
+      return deleteElem;
+    }
+  }
+
+  reverse() {
+    let newArr = new MyArray();
+    for (let i = 0; i < this.length; i++) {
+      newArr.push(this[i]);
+    }
+    for (let i = 0; i < this.length; i++) {
+      newArr[i] = this[[this.length - 1] - i];
+    }
+    for (let i = 0; i < this.length; i++) {
+      this[i] = newArr[i];
+    }
+    return this;
+  }
+  static isMyArray(obj) {
+    return obj instanceof MyArray;
+  }
+}
+const arr = new MyArray();
+arr.push(1, 2, 3, 5);
+
+//  --------------------------------7.Map practice
+// Даны несколько обьектов клиентов банка со следующими данными
+// fullName - ФИО клента
+// clientLevel - уровень договора с банком от которого зависят тарифы на определенные услуги
+// Также есть обьект банка содержащий следующие данные:
+// bankName - название банка
+// clientLevels - обьекты со свойствами, являющимися уровнями договора с банком (например basic, pro, platinum, ...).
+// Каждый уровень договора содержит внутри себя свойство discount которое хранит размер скидки в процентах
+// clientLevel должен быть связан с обьектом уровня договора через Map
+// Реализовать функцию расчета стоимости покупки пользователем торвара, которая принимает пользователя и цену товара и возвращает стоимость товара с учетом скидки.
+// Скидку доставать из хранящихся в мапе данных
+// В случае если в мапе с уровнем клиента нет своязанного уровня в банке (например там решили убрать этот уровень договора) то можно считать что скидки нет
+
+// Bonus tasks:
+// У обьектов клиентов должно быть свойство, показывающее деньги на их счету
+// При покупке количество денег на счету должно уменьшится на сумму покупки со скидкой
+// При попытке купить товар, на который у пользователя не хватит денег ему должно выкидывать ошибку, в которой указано сколько ему не хватает денег до покупки
+
+const client1 = {
+  fullName: 'Borisov Boris Borisovich',
+  clientLevel: 'platinum',
+  account: 1000,
+};
+const client2 = {
+  fullName: 'Antonov Anton Antonovich',
+  clientLevel: 'pro',
+  account: 1000,
+};
+const bank = {
+  bankName: 'Super bank',
+  clientLevels: {
+    basic: {
+      discount: 0.1,
+    },
+    pro: {
+      discount: 0.5,
+    },
+    platinum: {
+      discount: 0.7,
+    },
+  },
+};
+const contract = new Map([
+  [client1, bank.clientLevels[client1.clientLevel].discount],
+  [client2, bank.clientLevels[client2.clientLevel].discount],
+]);
+
+const pricePurchase = function (client, price) {
+  const priceWithDiscount =
+    price * (contract.has(client) ? contract.get(client) : 1);
+  if (client.account > priceWithDiscount) {
+    client.account -= priceWithDiscount;
+    return priceWithDiscount;
+  } else {
+    return `you are missing ${priceWithDiscount - client.account}`;
+  }
+};
