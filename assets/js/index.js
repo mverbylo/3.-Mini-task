@@ -313,7 +313,7 @@ class MyArray {
   shift(...elems) {
     for (let i = 0; i < this.length; i++) {
       this[i + elems.length] = this[i];
-    } // при использовании шифта в консоле во второй раз ломается все 
+    } // при использовании шифта в консоле во второй раз ломается все
     for (let i = 0; i < elems.length; i++) {
       this[i] = elems[i];
     }
@@ -351,7 +351,7 @@ class MyArray {
   }
 }
 const arr = new MyArray();
-arr.push(1, 2, 3,4);
+arr.push(1, 2, 3, 4);
 
 //  --------------------------------7.Map practice
 // Даны несколько обьектов клиентов банка со следующими данными
@@ -402,7 +402,8 @@ const contract = new Map([
 
 const pricePurchase = function (client, price) {
   const priceWithDiscount =
-    price * (contract.has(client.clientLevel) ? contract.get(client.clientLevel) : 1);
+    price *
+    (contract.has(client.clientLevel) ? contract.get(client.clientLevel) : 1);
   if (client.account > priceWithDiscount) {
     client.account -= priceWithDiscount;
     return priceWithDiscount;
@@ -410,3 +411,267 @@ const pricePurchase = function (client, price) {
     return `you are missing ${priceWithDiscount - client.account}`;
   }
 };
+
+//  --------------------------------8.JS practice
+// 1 Вычислить сумму первых N элементов последовательности . параметр N задает пользователь
+// (например n=4 , 1+2+3+4)
+
+const sumNumbers = function (number) {
+  if (typeof number !== 'number' || isNaN(number)) {
+    throw new TypeError('Add number');
+  }
+  let result = 0;
+  for (; 0 < number; --number) {
+    result += number;
+  }
+  return result;
+};
+
+// 2.1 Создать объект student который содержит следующие свойства: имя, фамилию, пол, контактные данные, id.
+// 2.2 Создать объект студентской группы, содержащий имя университета, факультета и кафедры
+// 2.3 Связать обьект студента с обьектом его группы
+// 2.4 Реализовать функцию вывода на экран всей информации о студенте (включая и информацию, связанную с универом) в произвольном виде. Функция должна принимать обьект студента
+
+const student = {
+  firstName: 'Test',
+  lastName: 'Testovich',
+  gender: 'male',
+  contact: 123456789,
+  id: 754,
+  dateOfApplication: '2020-09-01',
+
+  get course() {
+    if (
+      new Date().getFullYear() -
+        new Date(this.dateOfApplication).getFullYear() >
+      5
+    ) {
+      throw new Error('already graduated');
+    }
+    return (
+      new Date().getFullYear() - new Date(this.dateOfApplication).getFullYear()
+    );
+  },
+};
+const studentGroup = {
+  university: 'ZNTU',
+  faculty: 'FRET',
+  department: 'data protection',
+};
+
+const studentAndStudentGroup = new Map();
+studentAndStudentGroup.set(student, studentGroup);
+const informationAboutStudent = function (student) {
+  for (let prop in student) {
+    console.log(prop + ' - ' + student[prop]);
+  }
+  for (let prop in studentAndStudentGroup.get(student)) {
+    console.log(prop + ' - ' + studentAndStudentGroup.get(student)[prop]);
+  }
+  return 'Its all information  about student';
+};
+
+// 3.1 Создать числовой массив и проинициализировать его из 25 элементов.
+const numbers = [
+  10, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, -10, 11, -12, 13, 14, 15, 16, 17, 18, 19,
+  20, 21, 22, 23,
+];
+
+// 3.2 Вывести элементы с четными индексами
+const evenIndex = function (numbers) {
+  for (let i = 0; i < numbers.length; i++) {
+    if (i % 2 === 0) {
+      console.log(numbers[i]);
+    }
+  }
+};
+// 3.3 Вывести только четные элементы (четные числа делятся на 2 без остатка)
+const evenElem = function (numbers) {
+  for (let i = 0; i < numbers.length; i++) {
+    if ([numbers[i]] % 2 === 0) {
+      console.log(numbers[i]);
+    }
+  }
+};
+
+// 3.4 Вывести индексы элементов, равных нулю ( если таковых нет то добавить 1-2 для проверки)
+const zeroElem = function (numbers) {
+  for (let i = 0; i < numbers.length; i++) {
+    if ([numbers[i]] == 0) {
+      // === не работает
+      console.log([i]);
+    }
+  }
+};
+
+// 3.5 Подсчитать количество отрицательных чисел в массиве
+const negativeElem = function (numbers) {
+  let res = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    if ([numbers[i]] < 0) {
+      res++;
+    }
+  }
+  return res;
+};
+
+// 4 Создать классы:
+// - Книга (автор, название, год издания, издательство)
+// - Электронная версия книги (автор, название, год издания, издательство, формат, электронный номер)
+
+class Book {
+  #author;
+  #name;
+  #yearOfPublication;
+  #publisher;
+
+  constructor(author, name, yearOfPublication, publisher) {
+    this.author = author;
+    this.name = name;
+    this.yearOfPublication = yearOfPublication;
+    this.publisher = publisher;
+  }
+  get author() {
+    return this.#author;
+  }
+  get name() {
+    return this.#name;
+  }
+  get yearOfPublication() {
+    return this.#yearOfPublication;
+  }
+  get publisher() {
+    return this.#publisher;
+  }
+  set author(newAuthor) {
+    if (typeof newAuthor !== 'string' || newAuthor.trim() === '') {
+      throw new TypeError('Add string');
+    }
+    this.#author = newAuthor.trim();
+  }
+  set name(newName) {
+    if (typeof newName !== 'string' || newName.trim() === '') {
+      throw new TypeError('Add string');
+    }
+    this.#name = newName.trim();
+  }
+  set yearOfPublication(newYearOfPublication) {
+    if (
+      typeof newYearOfPublication !== 'number' ||
+      isNaN(newYearOfPublication)
+    ) {
+      throw new TypeError('Add number');
+    }
+    if (newYearOfPublication < 0) {
+      throw new RangeError('Add number>0');
+    }
+    if (newYearOfPublication > 1 + new Date().getFullYear()) {
+      throw new RangeError('Add number < carrent year');
+    }
+    this.#yearOfPublication = newYearOfPublication;
+  }
+  set publisher(newPublisher) {
+    if (typeof newPublisher !== 'string' || newPublisher.trim() === '') {
+      throw new TypeError('Add string');
+    }
+    this.#publisher = newPublisher.trim();
+  }
+}
+
+class ElectronicVersionOfTheBook extends Book {
+  #format;
+  #electronicNumber;
+  constructor(
+    author,
+    name,
+    yearOfPublication,
+    publisher,
+    format,
+    electronicNumber
+  ) {
+    super(author, name, yearOfPublication, publisher);
+    this.format = format;
+    this.electronicNumber = electronicNumber;
+  }
+  get format() {
+    return this.#format;
+  }
+  get electronicNumber() {
+    return this.#electronicNumber;
+  }
+  set format(newFormat) {
+    if (typeof newFormat !== 'string' || newFormat.trim() === '') {
+      throw new TypeError('Add string');
+    }
+    this.#format = newFormat.trim();
+  }
+  set electronicNumber(newElectronicNumber) {
+    if (typeof newElectronicNumber !== 'number' || isNaN(newElectronicNumber)) {
+      throw new TypeError('Add number');
+    }
+    if (newElectronicNumber < 0) {
+      throw new RangeError('Add number>0');
+    }
+
+    this.#electronicNumber = newElectronicNumber;
+  }
+}
+
+// 5 Требуется написать функцию, выводящую в консоль числа от 1 до n, где n — это целое число, которая функция принимает в качестве параметра, с такими условиями:
+// вывод fizzbuzz вместо чисел, кратных как 3, так и 5.
+// вывод fizz вместо чисел, кратных 3;
+// вывод buzz вместо чисел, кратных 5;
+
+const fizzbuzz = function (number) {
+  for (let i = 1; i <= number; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+      console.log('fizzbuzz');
+      continue;
+    }
+    if (i % 3 === 0) {
+      console.log('fizz');
+      continue;
+    }
+    if (i % 5 === 0) {
+      console.log('buzz');
+      continue;
+    }
+    console.log(i);
+  }
+};
+
+// 6 С сервера передается обьект, имеющий следующую структуру:
+// С помощью деструктуризации:
+// - создать переменную users на основании массива в обьекте serverResponse
+// - создать отдельные переменные для 3 и 4 пользователя
+const serverResponse = {
+  data: {
+    data: [
+      {
+        id: 0,
+        name: 'John',
+        lastName: 'Doe',
+      },
+      {
+        id: 1,
+        name: 'Jane',
+        lastName: 'Doe',
+      },
+      {
+        id: 2,
+        name: 'Admin',
+        lastName: 'Tiranovich',
+      },
+      {
+        id: 3,
+        name: 'User',
+        lastName: 'Undefinovich',
+      },
+    ],
+  },
+};
+const {
+  data: { data: users },
+} = serverResponse;
+
+const [, , users2, user3] = users;
