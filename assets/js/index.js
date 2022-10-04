@@ -311,9 +311,9 @@ class MyArray {
   }
 
   shift(...elems) {
-    for (let i = 0; i <= elems.length; i++) {
+    for (let i = 0; i < this.length; i++) {
       this[i + elems.length] = this[i];
-    } // последний элемент не добавляется
+    } // при использовании шифта в консоле во второй раз ломается все 
     for (let i = 0; i < elems.length; i++) {
       this[i] = elems[i];
     }
@@ -351,7 +351,7 @@ class MyArray {
   }
 }
 const arr = new MyArray();
-arr.push(1, 2, 3, 5);
+arr.push(1, 2, 3,4);
 
 //  --------------------------------7.Map practice
 // Даны несколько обьектов клиентов банка со следующими данными
@@ -396,13 +396,13 @@ const bank = {
   },
 };
 const contract = new Map([
-  [client1, bank.clientLevels[client1.clientLevel].discount],
-  [client2, bank.clientLevels[client2.clientLevel].discount],
+  [client1.clientLevel, bank.clientLevels[client1.clientLevel].discount],
+  [client2.clientLevel, bank.clientLevels[client2.clientLevel].discount],
 ]);
 
 const pricePurchase = function (client, price) {
   const priceWithDiscount =
-    price * (contract.has(client) ? contract.get(client) : 1);
+    price * (contract.has(client.clientLevel) ? contract.get(client.clientLevel) : 1);
   if (client.account > priceWithDiscount) {
     client.account -= priceWithDiscount;
     return priceWithDiscount;
