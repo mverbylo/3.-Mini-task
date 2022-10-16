@@ -449,7 +449,7 @@ const student = {
       throw new Error('already graduated');
     }
     return (
-      new Date().getFullYear() - new Date(this.dateOfApplication).getFullYear()
+      new Date().getFullYear() - new Date(this.dateOfApplication).getFullYear()+1
     );
   },
 };
