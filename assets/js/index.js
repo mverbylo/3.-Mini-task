@@ -251,7 +251,7 @@ class RangeValidator {
 }
 const range1 = new RangeValidator(5, 50);
 */
-// --------------------------------6.MyArray
+/* --------------------------------6.MyArray
 // Добавить к имеющимуся классу MyArray следующие методы, имитирующие поведения реальных методов массива:
 // unshift
 // shift
@@ -310,17 +310,17 @@ class MyArray {
     };
   }
 
-  shift(...elems) {
-    for (let i = 0; i < this.length; i++) {
+  unshift(...elems) {
+    for (let i = this.length - 1; i >= 0; i--) {
       this[i + elems.length] = this[i];
-    } // при использовании шифта в консоле во второй раз ломается все
+    }
     for (let i = 0; i < elems.length; i++) {
       this[i] = elems[i];
     }
     return (this.length += elems.length);
   }
 
-  unshift() {
+  shift() {
     if (this.length === 0) {
       return;
     } else {
@@ -333,16 +333,42 @@ class MyArray {
     }
   }
 
-  reverse() {
+  forEach(callback) {
+    if (typeof callback !== 'function')
+      throw TypeError('enter function in argument');
+    for (let i = 0; i < this.length; i++) {
+      callback(this[i], i, this);
+    }
+  }
+  map(callback) {
+    if (typeof callback !== 'function')
+      throw TypeError('enter function in argument');
     let newArr = new MyArray();
     for (let i = 0; i < this.length; i++) {
-      newArr.push(this[i]);
+      newArr.push(callback(this[i], i, this));
     }
+    return newArr;
+  }
+  filter(callback) {
+    if (typeof callback !== 'function')
+      throw TypeError('enter function in argument');
+    let newArr = new MyArray();
     for (let i = 0; i < this.length; i++) {
-      newArr[i] = this[[this.length - 1] - i];
+      if (callback(this[i], i, this)) {
+        newArr.push(callback(this[i]));
+      }
     }
-    for (let i = 0; i < this.length; i++) {
-      this[i] = newArr[i];
+    return newArr;
+  }
+  reverse() {
+    if (this.length === 0) return;
+    let [i, j, k] = [0, this.length - 1, undefined];
+    for (let swap = 0; swap <= Math.floor(this.length / 2); swap++) {
+      k = this[j];
+      this[j] = this[i];
+      this[i] = k;
+      i++;
+      j--;
     }
     return this;
   }
@@ -350,9 +376,10 @@ class MyArray {
     return obj instanceof MyArray;
   }
 }
+
 const arr = new MyArray();
 arr.push(1, 2, 3, 4);
-
+*/
 //  --------------------------------7.Map practice
 // Даны несколько обьектов клиентов банка со следующими данными
 // fullName - ФИО клента
@@ -449,7 +476,9 @@ const student = {
       throw new Error('already graduated');
     }
     return (
-      new Date().getFullYear() - new Date(this.dateOfApplication).getFullYear()+1
+      new Date().getFullYear() -
+      new Date(this.dateOfApplication).getFullYear() +
+      1
     );
   },
 };
