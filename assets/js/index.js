@@ -380,7 +380,7 @@ class MyArray {
 const arr = new MyArray();
 arr.push(1, 2, 3, 4);
 */
-//  --------------------------------7.Map practice
+/*  --------------------------------7.Map practice
 // Даны несколько обьектов клиентов банка со следующими данными
 // fullName - ФИО клента
 // clientLevel - уровень договора с банком от которого зависят тарифы на определенные услуги
@@ -438,7 +438,7 @@ const pricePurchase = function (client, price) {
     return `you are missing ${priceWithDiscount - client.account}`;
   }
 };
-
+*/
 //  --------------------------------8.JS practice
 // 1 Вычислить сумму первых N элементов последовательности . параметр N задает пользователь
 // (например n=4 , 1+2+3+4)
@@ -446,6 +446,9 @@ const pricePurchase = function (client, price) {
 const sumNumbers = function (number) {
   if (typeof number !== 'number' || isNaN(number)) {
     throw new TypeError('Add number');
+  }
+  if (number <= 0) {
+    throw new RangeError('Add positive number');
   }
   let result = 0;
   for (; 0 < number; --number) {
@@ -462,7 +465,7 @@ const sumNumbers = function (number) {
 const student = {
   firstName: 'Test',
   lastName: 'Testovich',
-  gender: 'male',
+  isMale: true,
   contact: 123456789,
   id: 754,
   dateOfApplication: '2020-09-01',
@@ -502,44 +505,28 @@ const informationAboutStudent = function (student) {
 
 // 3.1 Создать числовой массив и проинициализировать его из 25 элементов.
 const numbers = [
-  10, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, -10, 11, -12, 13, 14, 15, 16, 17, 18, 19,
+  10, 0, 1, 2, 3, 4, 0, 6, 7, 8, 9, -10, 11, -12, 13, 14, 15, 16, 17, 18, 19,
   20, 21, 22, 23,
 ];
-
+// const numbers = new Array(25)
+//   .fill(undefined)
+//   .map((_, i) => (Math.random() > 0.5 ? i : -i));
 // 3.2 Вывести элементы с четными индексами
-const evenIndex = function (numbers) {
-  for (let i = 0; i < numbers.length; i++) {
-    if (i % 2 === 0) {
-      console.log(numbers[i]);
-    }
-  }
-};
+const evenIndex = numbers.filter((_, i) => i % 2 === 0);
+
 // 3.3 Вывести только четные элементы (четные числа делятся на 2 без остатка)
-const evenElem = function (numbers) {
-  for (let i = 0; i < numbers.length; i++) {
-    if ([numbers[i]] % 2 === 0) {
-      console.log(numbers[i]);
-    }
-  }
-};
+const evenElem = numbers.filter((e) => e % 2 === 0);
 
 // 3.4 Вывести индексы элементов, равных нулю ( если таковых нет то добавить 1-2 для проверки)
-const zeroElem = function (numbers) {
-  for (let i = 0; i < numbers.length; i++) {
-    if ([numbers[i]] == 0) {
-      // === не работает
-      console.log([i]);
-    }
-  }
-};
+const zeroElem = numbers
+  .map((e, i) => (e === 0 ? i : undefined))
+  .filter((e) => e || e === 0);
 
 // 3.5 Подсчитать количество отрицательных чисел в массиве
 const negativeElem = function (numbers) {
   let res = 0;
-  for (let i = 0; i < numbers.length; i++) {
-    if ([numbers[i]] < 0) {
-      res++;
-    }
+  for (const e of numbers) {
+    e < 0 ? res++ : undefined;
   }
   return res;
 };
@@ -655,17 +642,11 @@ const fizzbuzz = function (number) {
   for (let i = 1; i <= number; i++) {
     if (i % 3 === 0 && i % 5 === 0) {
       console.log('fizzbuzz');
-      continue;
-    }
-    if (i % 3 === 0) {
+    } else if (i % 3 === 0) {
       console.log('fizz');
-      continue;
-    }
-    if (i % 5 === 0) {
+    } else if (i % 5 === 0) {
       console.log('buzz');
-      continue;
-    }
-    console.log(i);
+    } else console.log(i);
   }
 };
 

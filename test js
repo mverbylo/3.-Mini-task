@@ -1,0 +1,20 @@
+const numbers = new Array(25)
+  .fill(undefined)
+  .map((_, i) => (Math.random() > 0.5 ? i : -i));
+
+// 3.2 Вывести элементы с четными индексами
+// const evenIndex = numbers.filter((_, i) => i % 2 === 0);
+
+// 3.3 Вывести только четные элементы (четные числа делятся на 2 без остатка)
+// const evenElem = (numbers) =>
+//   numbers.filter((_, i) =>
+//     [numbers[i]] % 2 === 0 ? console.log(numbers[i]) : undefined
+//   );
+
+// const evenElem = function (numbers) {
+//   for (let i = 0; i < numbers.length; i++) {
+//     if ([numbers[i]] % 2 === 0) {
+//       console.log(numbers[i]);
+//     }
+//   }
+// };
